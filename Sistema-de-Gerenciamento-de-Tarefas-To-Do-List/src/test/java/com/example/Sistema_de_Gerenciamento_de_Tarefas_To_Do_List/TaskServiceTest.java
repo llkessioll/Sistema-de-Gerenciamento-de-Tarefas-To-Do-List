@@ -1,11 +1,17 @@
 package com.example.Sistema_de_Gerenciamento_de_Tarefas_To_Do_List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.scheduling.config.Task;
+
+import com.example.Sistema_de_Gerenciamento_de_Tarefas_To_Do_List.controller.TaskService;
+import com.example.Sistema_de_Gerenciamento_de_Tarefas_To_Do_List.model.Task;
+
 
 public class TaskServiceTest {
 
@@ -14,18 +20,18 @@ public class TaskServiceTest {
 		
 		TaskService service = new TaskService();
 		
-		Taks tarefa = service.addTask("Estudar TDD e BDD");
+		Task tarefa = service.addTask("Estudar TDD e BDD");
 		
-		asserNotNull(tarefa.getId());
-		asserEquals("Estudar TDD e BDD", tarefa.getDescricao());
-		asserFalse(tarefa.isConcluidida);
+		assertNotNull(tarefa.getId());
+		assertEquals("Estudar TDD e BDD", tarefa.getDescricao());
+		assertFalse(tarefa.isConcluida());
 		
 	}
 	
 	@Test
 	public void listarTodasAsTarefas() {
 		
-		TaskService service = new TaskServive();
+		TaskService service = new TaskService();
 		
 		service.addTask("Estudar TDD e BDD");
 		service.addTask("Estudar banco de dados");
@@ -61,7 +67,7 @@ public class TaskServiceTest {
 		
 		service.removerTask(serviceUm.getId());
 		
-		List<Task> tarefas = service.getAllTask();
+		List<Task> tarefas = service.getAllTasks();
 	}
 	
 	@Test
@@ -72,7 +78,7 @@ public class TaskServiceTest {
 		Task newService = service.addTask("Estudar TDD e BDD");
 		service.completeTask(newService.getId());
 		
-		Taks atualizado = service.getTaskbyId(newService.getId());
+		Task atualizado = service.getTaskById(newService.getId());
 		
 		assertTrue(atualizado.isConcluida());
 	}
