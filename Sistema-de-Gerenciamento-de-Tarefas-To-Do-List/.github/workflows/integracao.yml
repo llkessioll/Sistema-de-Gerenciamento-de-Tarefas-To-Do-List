@@ -1,22 +1,22 @@
-name: CI TDD com Teste
+name: CI - TDD com Testes Unitários
 
 on:
   push:
 
 jobs:
   build:
-    runs=on: ubuntu-latest
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout do Codigo
-        uses: actions/Checkout@v4
+      - name: Checkout do código
+        uses: actions/checkout@v4
 
-      - name: Configurar java
+      - name: Configurar Java
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
           cache: 'maven'
 
-      - name: Rodar Testes
-        run : mvn test
+      - name: Rodar testes unitários
+        run: mvn test
