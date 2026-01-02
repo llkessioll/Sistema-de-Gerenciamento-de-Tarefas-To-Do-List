@@ -1,0 +1,22 @@
+name: CI TDD com Teste
+
+on:
+  push:
+
+jobs:
+  build:
+    runs=on: ubuntu-latest
+
+    steps:
+      - name: Checkout do Codigo
+        uses: actions/Checkout@v4
+
+      - name: Configurar java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'maven'
+
+      - name: Rodar Testes
+        run : mvn test
